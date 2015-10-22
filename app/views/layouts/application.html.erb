@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NflConfidence</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  
+</head>
+<body>
+  <div id="sidebar">
+    <ul>
+      <li><%= link_to 'Home', root_path %></li>
+      <li><%= link_to 'Users', users_path %></li>
+      <li><%= link_to 'Weekly Picks', weeks_path %></li>
+    </ul>
+    <% if user_signed_in? %>
+    <ul>
+      <li><%= link_to 'Sign Out', destroy_user_session_path, :method => :delete  %></li>
+    </ul>
+    <% else %>
+    <ul>  
+      <li><%= link_to 'Sign In', new_user_session_path %></li>
+      <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+    </ul>
+    <% end %>
+  </div>
+  <div id="main_content">
+    <% flash.each do |name, msg| %>
+      <%= content_tag(:div, msg, class: "alert") %>
+    <% end %>
+      
+    <%= yield %>
+    
+  </div>
+</body>
+</html>
