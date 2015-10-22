@@ -1,11 +1,13 @@
 class WeeksController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     @weeks = Week.all
   end
 
   def show #We show the week, and allow the user to modify their picks in the same view
     @week = Week.find_by_id(params[:id])
-    @user = User.first #place holder until current_user is implemented
+    @user = current_user
     @games = @week.games
     @picks = []
     @games.each do |game|

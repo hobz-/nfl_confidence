@@ -1,12 +1,14 @@
 class PicksController < ApplicationController
+  before_action :authenticate_user!
   
   def create
     
     if validate_weekly_picks
-      @user = User.first #place holder until current_user is implemented
+      @user = current_user
       picks_params[:picks].each do |key, pick|
         game = Game.find(pick[:game_id])
-        @existing_pick = @user.picks.find(pick[:game_id])
+
+        @existing_pick = @user.picks.find(key)
         if @existing_pick.updated_and_changed?(pick)
             flash[:success] ||= []
             flash[:success] << "Updated " + game.home_team + 
@@ -17,6 +19,7 @@ class PicksController < ApplicationController
             flash[:error] << error
           end
         end
+
       end
     end
 
