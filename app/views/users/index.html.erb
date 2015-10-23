@@ -1,5 +1,12 @@
+<table>
+   <tr>
+      <th>Name</th>
+      <th>Nickname</th>
+   </tr>
 <% @users.each do |user| %>
-   <div class="user-row"><%= user.email %></div>
-   <div class="user-row"><%= user.name %></div>
-   <div class="user-row"><%= user.nickname %></div>
+   <tr>
+      <td><%= user.name %></td>
+      <td><%= user.nickname %></td>
+   </tr>
 <% end %>
+</table>

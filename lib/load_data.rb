@@ -27,10 +27,10 @@ def load_week(season, week_number)
     @game.away_score = result.away_score
     
     if @game.home_score > @game.away_score
-      @game.winner = @game.home_city
+      @game.winner = "home_team"
     elsif
       @game.away_score > @game.home_score
-      @game.winner = @game.away_city
+      @game.winner = "away_team"
     else
       @game.winner = "TBD"
     end
