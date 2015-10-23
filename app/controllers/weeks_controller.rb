@@ -20,6 +20,12 @@ class WeeksController < ApplicationController
     @picks << pick 
     end
   end
+  
+  private
+  
+  def check_last_game(week)
+    @games = week.games
+  end
 end
 
 
