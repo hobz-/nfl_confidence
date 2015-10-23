@@ -1,1 +1,17 @@
 <h1>Welcome to ConocoPhillips Confidence Picks</h1>
+<br>
+<h2>LEADERBOARDS</h2>
+<table class="leaderboards">
+  <tr>
+    <th>Name</th>
+    <th>Score</th>
+    <th>Weekly Wins</th>
+  </tr>
+  <% @users.each do |user| %>
+  <tr>
+    <td><%= user.email %></td>
+    <td><%= user.score %></td>
+    <td><%= user.weekly_wins %></td>
+  </tr>
+  <% end %>
+</table>

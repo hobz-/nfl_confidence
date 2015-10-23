@@ -14,6 +14,7 @@ def load_week(season, week_number)
     @game.season = season
     @game.game_day = result.game_day
     @game.game_time = result.game_time
+            
     @game.home_team = result.home_team
     @game.home_city = result.home_city
     @game.home_record = result.home_record
@@ -24,7 +25,16 @@ def load_week(season, week_number)
     @game.away_img = result.away_img
     @game.home_score = result.home_score
     @game.away_score = result.away_score
-    @game.winner = result.winner
+    
+    if @game.home_score > @game.away_score
+      @game.winner = @game.home_city
+    elsif
+      @game.away_score > @game.home_score
+      @game.winner = @game.away_city
+    else
+      @game.winner = "TBD"
+    end
+    @game.game_start = @game.convert_game_time
     @game.save
   end
 end

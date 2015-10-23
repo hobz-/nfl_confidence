@@ -232,4 +232,24 @@
 	display:inline-block;
 	padding:10px;
 	border:3px solid black;
+	td {
+		padding: 5px;
+	}
+}
+
+.leaderboards{
+	width:25%;
+	display:inline-block;
+	padding:10px;
+	border:3px solid black;
+	th{
+	padding: 5px;
+	font-size: 150%;
+	text-align: center;
+	}
+	td{
+		padding: 5px;
+		text-align: center;
+	}
+	
 }

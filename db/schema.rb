@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022034138) do
+ActiveRecord::Schema.define(version: 20151023181223) do
 
   create_table "games", force: :cascade do |t|
     t.string   "away_team"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20151022034138) do
     t.string   "away_img"
     t.string   "home_record"
     t.string   "away_record"
+    t.datetime "game_start"
   end
 
   create_table "picks", force: :cascade do |t|
@@ -61,6 +62,8 @@ ActiveRecord::Schema.define(version: 20151022034138) do
     t.integer  "user_id"
     t.string   "name"
     t.string   "nickname"
+    t.integer  "score"
+    t.integer  "weekly_wins"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

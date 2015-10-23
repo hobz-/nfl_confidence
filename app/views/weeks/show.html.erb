@@ -14,13 +14,23 @@
             <td><img src="<%= @games[i].away_img %>"></td>
             <td><%= @games[i].away_team %></td>
             <td><%= @games[i].away_record %></td>
-            <td><%= pick_form.number_field :away_team, :style=>"width:40px;"%></td>
+            <% if @games[i].game_time.index("FINAL") == 0 %>
+              <td><%= pick.away_team %></td>
+              <td><%= pick_form.hidden_field :away_team, :value => pick.away_team%></td>
+            <% else %>
+              <td><%= pick_form.number_field :away_team, :style=>"width:40px;"%></td>
+            <% end %>
           </tr>
           <tr>
             <td><img src="<%= @games[i].home_img %>"></td>
             <td><%= @games[i].home_team %></td>
             <td><%= @games[i].home_record %></td>
+            <% if @games[i].game_time.index("FINAL") == 0 %>
+              <td><%= pick.home_team %></td>
+              <td><%= pick_form.hidden_field :home_team, :value => pick.home_team%></td>
+              <% else %>
             <td><%= pick_form.number_field :home_team, :style=>"width:40px;" %></td>
+            <% end %>
           </tr>
       </table>
       <% i += 1 %>

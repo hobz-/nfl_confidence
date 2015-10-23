@@ -39,13 +39,14 @@ module NflData
             game_result.away_score = box.css(away_team_css + ' div.team-data p.total-score').text
             game_result.away_img = box.css(away_team_css + ' img')[0]['src']
             
-            if game_result.home_score > game_result.away_score
-              game_result.winner = game_result.home_city
-            elsif game_result.away_score > game_result.home_score
-              game_result.winner = game_result.away_city
-            else
-              game_result.winner = "TBD"
-            end
+            #Somehow the code below is givign the wrong result for the winning team when loaded... 
+            #if game_result.home_score > game_result.away_score
+            #  game_result.winner = game_result.home_city
+            #elsif game_result.away_score > game_result.home_score
+            #  game_result.winner = game_result.away_city
+            #else
+            #  game_result.winner = "TBD"
+            #end
             weekly_results.games << game_result
         end
         
