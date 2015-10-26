@@ -1,0 +1,28 @@
+<table class="table table-bordered table-hover table-condensed results-table">
+  <tr>
+    <th>Game</th>
+    <% @users.each do |user| %>
+      <th class="player-column"><%= user.nickname %></th>
+    <% end %>
+  </tr>
+  <% @week.games.each do |game| %>
+    <tr>
+      <td><%= game.away_team + ' vs. ' + game.home_team %></td>
+      <% @users.each do |user| %>
+        <td><%= game.picks.where(user_id: user.id).first ? game.picks.where(user_id: user.id).first.result : '0' %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  <tr>
+    <td>Total</td>
+    <% @users.each do |user| %>
+      <% total_score = 0 %>
+      <% @week.picks.where(user_id: user.id).each do |pick| %>
+          <% if !pick.result.nil? %>
+            <% total_score += pick.result %>
+          <% end %>
+      <% end %>
+      <td><%= total_score %></td>
+    <% end %>
+  </tr>
+</table>
