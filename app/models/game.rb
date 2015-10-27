@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
   belongs_to :week
-  has_many :picks
+  has_many :picks, :dependent => :destroy
   
   def convert_game_time
     index = self.game_time.index("AM") || self.game_time.index("PM")
