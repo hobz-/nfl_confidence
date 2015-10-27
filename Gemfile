@@ -10,6 +10,7 @@ gem 'jbuilder',             '2.2.3'
 gem 'sdoc',                 '0.4.0', group: :doc
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.5.1'
 gem 'devise', '~> 3.5', '>= 3.5.2'
+gem 'whenever', :require => false
 
 group :development, :test do
   gem 'sqlite3',     '1.3.9'

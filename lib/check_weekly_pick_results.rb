@@ -1,12 +1,12 @@
-season, week_number = ARGV
-
 require 'nokogiri'
 require 'open-uri'
 require 'json'
 
-load 'nfl_data/models/result.rb'
-load 'nfl_data/parsers/result_parser.rb'
-
+load 'lib/nfl_data/models/result.rb'
+load 'lib/nfl_data/parsers/result_parser.rb'
+ 
+season, week_number = ARGV 
+    
 @weekly_results = NflData::ResultParser.new
 @games = @weekly_results.get_result(season,week_number)
 @week = Week.find_by(number:week_number)

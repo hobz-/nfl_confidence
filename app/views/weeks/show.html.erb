@@ -1,51 +1,65 @@
+<script>
+$(function () {
+    $("#sortable").sortable({
+        tolerance: 'pointer',
+        revert: 'invalid',
+        placeholder: 'col-md-4 ui-state-highlight',
+        start: function( event, ui ) {
+            ui.placeholder.height(ui.item.height())
+            ui.placeholder.width(ui.item.width())
+        }
+    });
+});
+</script>
+
 <% i = 0 %>
 <%= form_tag picks_path do %>
-  <div class="row">
-  <% @picks.each do |pick| %>
-    <%= fields_for 'picks[]', pick, :hidden_field_id => true do |pick_form| %>
-      <div class="col-md-4">
-        <div class="table-responsive">
-          <table class="weekly-pick">
-            <%= pick_form.hidden_field :game_id, :value => @games[i].id %>
-            <%= pick_form.hidden_field :week_id, :value => @week.id %>
-            <tr>
-              <td></td>
-              <td><%= @games[i].game_day %></td>
-              <td><%= @games[i].game_time %></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td><%= image_tag @games[i].away_img, size: "80x55"%></td>
-              <td><%= @games[i].away_team %></td>
-              <td><%= @games[i].away_record %></td>
-              <% if @games[i].has_started? %>
-                <td>
-                  <%= pick.away_team %>
-                  <%= pick_form.hidden_field :away_team, :value => pick.away_team%>
-                </td>
-              <% else %>
-                <td><%= pick_form.number_field :away_team, :style=>"width:40px;"%></td>
-              <% end %>
-            </tr>
-            <tr>
-              <td><%= image_tag @games[i].home_img, size: "80x55"%></td>
-              <td><%= @games[i].home_team %></td>
-              <td><%= @games[i].home_record %></td>
-              <% if @games[i].has_started? %>
-                <td>
-                  <%= pick.home_team %>
-                  <%= pick_form.hidden_field :home_team, :value => pick.home_team%>
-                </td>
-                <% else %>
-              <td><%= pick_form.number_field :home_team, :style=>"width:40px;" %></td>
-              <% end %>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <% i += 1 %>
+  <div class="row" id="sortable">
+    <% @picks.each do |pick| %>
+      <%= fields_for 'picks[]', pick, :hidden_field_id => true do |pick_form| %>
+          <div class="col-md-4">
+            <div class="table-responsive">
+              <table class="weekly-pick">
+                <%= pick_form.hidden_field :game_id, :value => @games[i].id %>
+                <%= pick_form.hidden_field :week_id, :value => @week.id %>
+                <tr>
+                  <td></td>
+                  <td><%= @games[i].game_day %></td>
+                  <td><%= @games[i].game_time %></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td><%= image_tag @games[i].away_img, size: "80x55"%></td>
+                  <td><%= @games[i].away_team %></td>
+                  <td><%= @games[i].away_record %></td>
+                  <% if @games[i].has_started? %>
+                    <td>
+                      <%= pick.away_team %>
+                      <%= pick_form.hidden_field :away_team, :value => pick.away_team%>
+                    </td>
+                  <% else %>
+                    <td><%= pick_form.number_field :away_team, :style=>"width:40px;"%></td>
+                  <% end %>
+                </tr>
+                <tr>
+                  <td><%= image_tag @games[i].home_img, size: "80x55"%></td>
+                  <td><%= @games[i].home_team %></td>
+                  <td><%= @games[i].home_record %></td>
+                  <% if @games[i].has_started? %>
+                    <td>
+                      <%= pick.home_team %>
+                      <%= pick_form.hidden_field :home_team, :value => pick.home_team%>
+                    </td>
+                    <% else %>
+                  <td><%= pick_form.number_field :home_team, :style=>"width:40px;" %></td>
+                  <% end %>
+                </tr>
+              </table>
+            </div>
+          </div>
+        <% i += 1 %>
+      <% end %>
     <% end %>
-  <% end %>
   </div>
 <br>
 <div class="row">
