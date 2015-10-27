@@ -4,6 +4,8 @@ class Pick < ActiveRecord::Base
   belongs_to :user
   belongs_to :week
   
+  before_validation :non_blank
+  
   validates_presence_of :game_id, :user_id, :home_team, :away_team
   
   validate :home_xor_away
@@ -19,8 +21,18 @@ class Pick < ActiveRecord::Base
   
   private
   
+    def non_blank
+      if self.home_team.blank?
+        self.home_team = 0
+      end
+      if self.away_team.blank?
+        self.away_team = 0
+      end
+    end
+      
+  
     def home_xor_away
-      if !(home_team == 0 && away_team == 0)
+      if !(self.home_team == 0 && self.away_team == 0)
         if !(home_team.zero? ^ away_team.zero?)
           game = Game.find(game_id)
           errors.add(:base, "Error in #{game.away_team} vs. #{game.home_team}, select home or away team.")
