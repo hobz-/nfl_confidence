@@ -10,7 +10,11 @@ class Game < ActiveRecord::Base
       game_time = "12:00 AM"
     end
     date_and_time = '%a, %b %e %Y %l:%M %p %Z'
-    DateTime.strptime(self.game_day + " 2015 " + game_time + "Eastern Time (US & Canada)",date_and_time)
+    if self.week.number == 17
+      DateTime.strptime(self.game_day + " 2017 " + game_time + "Eastern Time (US & Canada)",date_and_time)
+    else
+      DateTime.strptime(self.game_day + " 2016 " + game_time + "Eastern Time (US & Canada)",date_and_time)
+    end
   end
   
   def has_started?
